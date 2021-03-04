@@ -1,11 +1,11 @@
 import React from 'react';
-import App from '../backend/App.js';
 
 class Entry extends React.Component{
     constructor(props){
         super(props);
         this.state = {value: '',
-                      text: this.props.text};
+                      text: this.props.text,
+                      fun: this.props.fun};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -16,15 +16,7 @@ class Entry extends React.Component{
 
     handleSubmit(event){
         event.preventDefault();
-        if(this.state.text === "Number of Rows:"){
-            App.noOfRows = this.state.value?this.state.value:16;
-        }
-        else{
-            App.noOfCols = this.state.value?this.state.value:30;
-        }
-        if(App.noOfRows && App.noOfCols){
-            App.start();
-        }
+        this.state.fun(this.state.value, this.state.text);
     }
 
     render(){
